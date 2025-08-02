@@ -5,15 +5,26 @@ import 'package:firebase_core/firebase_core.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'firebase_options.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  bool firebaseInitialized = false;
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-  } else if (Platform.isAndroid) {
+    firebaseInitialized = true;
+  } else if (Platform.isAndroid || Platform.isIOS) {
     await Firebase.initializeApp();
+    firebaseInitialized = true;
+  }
+  if (firebaseInitialized) {
+    Fluttertoast.showToast(
+      msg: "Connected to Firebase successfully!",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+    );
   }
   runApp(const MyApp());
 }

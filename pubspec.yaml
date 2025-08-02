@@ -12,6 +12,7 @@ dependencies:
   flutter_svg: ^2.0.10
   firebase_core: ^2.27.0
   firebase_auth: ^4.17.0 # Only works on Android/iOS/Web, not Windows
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
